@@ -4,6 +4,12 @@ import {
   ReferenceDot, CartesianGrid, LineChart, Line, Tooltip
 } from "recharts";
 
+// --- IMAGE IMPORTS ---
+import stage0Img from "./images/stage0.png";
+import stage1Img from "./images/stage1.png";
+import stage2Img from "./images/stage2.png";
+import stage3Img from "./images/stage3.png";
+
 // --- CONSTANTS ---
 const ANCHORS = [
   { age: 18, lower: 19, upper: 24 }, { age: 24, lower: 19, upper: 24 },
@@ -45,10 +51,10 @@ function classify(bmi, bounds) {
 // --- IMAGE-BASED CLD COMPONENT ---
 const StageCld = ({ stage }) => {
   const imageMap = {
-    0: "images/stage0.png",
-    1: "images/stage1.png",
-    2: "images/stage2.png",
-    3: "images/stage3.png",
+    0: stage0Img,
+    1: stage1Img,
+    2: stage2Img,
+    3: stage3Img,
   };
 
   return (
@@ -123,7 +129,6 @@ export default function BmiSeriousGame() {
           <p style={{ color: COLORS.inkSoft }}>Analyze the interaction between reinforcing and balancing loops.</p>
         </header>
 
-        {/* GRID CHANGED TO 1fr 1fr FOR EQUAL WIDTH */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40 }}>
           <div style={{ background: "#fff", padding: 32, borderRadius: 16, border: `1px solid ${COLORS.line}`, height: "fit-content" }}>
             <StageCld stage={stage} />
@@ -132,103 +137,81 @@ export default function BmiSeriousGame() {
               <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
                 <h3 style={{ marginTop: 0 }}>Stage 0: Baseline</h3>
                 <div style={{ display: "flex", gap: 8 }}>
-                  {["female", "male"].map(g => (
+                  {[\"female\", \"male\"].map(g => (
                     <button key={g} onClick={() => setUser({...user, gender: g})} 
                       style={{ flex: 1, padding: 10, borderRadius: 8, border: `1px solid ${user.gender === g ? COLORS.accent : COLORS.line}`, 
-                      background: user.gender === g ? "rgba(47,111,98,0.1)" : "transparent", cursor: "pointer", textTransform: "capitalize" }}>{g}</button>
+                      background: user.gender === g ? \"rgba(47,111,98,0.1)\" : \"transparent\", cursor: \"pointer\", textTransform: \"capitalize\" }}>{g}</button>
                   ))}
                 </div>
                 <div><label style={{ fontSize: 13 }}>Age: {user.age}</label>
-                  <input type="range" min={18} max={90} value={user.age} onChange={e => setUser({...user, age: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
+                  <input type=\"range\" min={18} max={90} value={user.age} onChange={e => setUser({...user, age: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
                 </div>
                 <div><label style={{ fontSize: 13 }}>Height (cm): {user.height}</label>
-                  <input type="range" min={120} max={220} value={user.height} onChange={e => setUser({...user, height: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
+                  <input type=\"range\" min={120} max={220} value={user.height} onChange={e => setUser({...user, height: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
                 </div>
                 <div><label style={{ fontSize: 13 }}>Weight (kg): {user.weight}</label>
-                  <input type="range" min={30} max={200} value={user.weight} onChange={e => setUser({...user, weight: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
+                  <input type=\"range\" min={30} max={200} value={user.weight} onChange={e => setUser({...user, weight: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
                 </div>
-                <button onClick={() => setStage(1)} style={{ width: "100%", padding: 12, background: COLORS.accent, color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontWeight: 600 }}>Continue to Stage 1</button>
+                <button onClick={() => setStage(1)} style={{ width: \"100%\", padding: 12, background: COLORS.accent, color: \"#fff\", border: \"none\", borderRadius: 8, cursor: \"pointer\", fontWeight: 600 }}>Continue to Stage 1</button>
               </div>
             )}
 
             {stage === 1 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
+              <div style={{ display: \"flex\", flexDirection: \"column\", gap: 15 }}>
                 <h3 style={{ marginTop: 0 }}>Stage 1: Caloric Intake</h3>
                 <p style={{ fontSize: 13, color: COLORS.inkSoft }}>Threshold: {user.gender === 'male' ? '2300' : '1800'} kcal</p>
                 <div><label style={{ fontSize: 13 }}>Daily Calories: {user.calories}</label>
-                  <input type="range" min={1000} max={4000} step="50" value={user.calories} onChange={e => setUser({...user, calories: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
+                  <input type=\"range\" min={1000} max={4000} step=\"50\" value={user.calories} onChange={e => setUser({...user, calories: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
                 </div>
-                <button onClick={() => setStage(2)} style={{ width: "100%", padding: 12, background: COLORS.accent, color: "#fff", border: "none", borderRadius: 8, cursor: "pointer" }}>Continue to Stage 2</button>
+                <button onClick={() => setStage(2)} style={{ width: \"100%\", padding: 12, background: COLORS.accent, color: \"#fff\", border: \"none\", borderRadius: 8, cursor: \"pointer\" }}>Continue to Stage 2</button>
               </div>
             )}
 
             {stage === 2 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
+              <div style={{ display: \"flex\", flexDirection: \"column\", gap: 15 }}>
                 <h3 style={{ marginTop: 0 }}>Stage 2: Physical Activity</h3>
                 <p style={{ fontSize: 13, color: COLORS.inkSoft }}>Equilibrium: 2 days/week</p>
                 <div><label style={{ fontSize: 13 }}>Sport: {user.sportDays} days/week</label>
-                  <input type="range" min={0} max={7} value={user.sportDays} onChange={e => setUser({...user, sportDays: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
+                  <input type=\"range\" min={0} max={7} value={user.sportDays} onChange={e => setUser({...user, sportDays: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
                 </div>
-                <button onClick={() => setStage(3)} style={{ width: "100%", padding: 12, background: COLORS.accent, color: "#fff", border: "none", borderRadius: 8, cursor: "pointer" }}>Continue to Stage 3</button>
+                <button onClick={() => setStage(3)} style={{ width: \"100%\", padding: 12, background: COLORS.accent, color: \"#fff\", border: \"none\", borderRadius: 8, cursor: \"pointer\" }}>Continue to Stage 3</button>
               </div>
             )}
 
             {stage === 3 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
+              <div style={{ display: \"flex\", flexDirection: \"column\", gap: 15 }}>
                 <h3 style={{ marginTop: 0 }}>Stage 3: Nutritional Quality</h3>
                 <p style={{ fontSize: 13, color: COLORS.inkSoft }}>Equilibrium: 20% Healthy Food</p>
                 <div><label style={{ fontSize: 13 }}>Healthy Food: {user.healthyEating}%</label>
-                  <input type="range" min={0} max={100} value={user.healthyEating} onChange={e => setUser({...user, healthyEating: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
+                  <input type=\"range\" min={0} max={100} value={user.healthyEating} onChange={e => setUser({...user, healthyEating: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
                 </div>
-                <button onClick={() => setStage(0)} style={{ width: "100%", padding: 12, background: "#666", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer" }}>Restart Simulation</button>
+                <button onClick={() => setStage(0)} style={{ width: \"100%\", padding: 12, background: \"#666\", color: \"#fff\", border: \"none\", borderRadius: 8, cursor: \"pointer\" }}>Restart Simulation</button>
               </div>
             )}
             
             <div style={{ marginTop: 20 }}>
               <label style={{ fontSize: 13 }}>Simulation Duration: {user.weeks} weeks</label>
-              <input type="range" min={1} max={52} value={user.weeks} onChange={e => setUser({...user, weeks: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
+              <input type=\"range\" min={1} max={52} value={user.weeks} onChange={e => setUser({...user, weeks: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
             </div>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-            <div style={{ background: "#fff", padding: 32, borderRadius: 16, border: `1px solid ${COLORS.line}` }}>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 10 }}>
-                <span style={{ fontSize: 56, fontWeight: 600 }}>{finalBmi.toFixed(1).replace(".", ",")}</span>
+          <div style={{ display: \"flex\", flexDirection: \"column\", gap: 20 }}>
+            <div style={{ background: \"#fff\", padding: 32, borderRadius: 16, border: `1px solid ${COLORS.line}` }}>
+              <div style={{ display: \"flex\", alignItems: \"baseline\", gap: 16, marginBottom: 10 }}>
+                <span style={{ fontSize: 56, fontWeight: 600 }}>{finalBmi.toFixed(1).replace(\".\", \",\")}</span>
                 <span style={{ fontSize: 20, fontWeight: 500, color: status.color }}>{status.label}</span>
               </div>
               <p style={{ color: COLORS.inkSoft, marginBottom: 30 }}>Reference Range for {user.age} years: {bounds.lower.toFixed(0)}–{bounds.upper.toFixed(0)}</p>
-              <div style={{ height: 250, width: "100%", marginBottom: 20 }}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={referenceChartData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
-                    <CartesianGrid stroke={COLORS.line} vertical={false} />
-                    <XAxis dataKey="age" type="number" domain={[18, 90]} tick={{ fontSize: 12, fill: COLORS.inkSoft }} />
-                    <YAxis domain={[Y_MIN, Y_MAX]} tick={{ fontSize: 12, fill: COLORS.inkSoft }} />
-                    <Area dataKey="underweight" stackId="z" stroke="none" fill={COLORS.underweight} fillOpacity={0.8} />
-                    <Area dataKey="normal" stackId="z" stroke="none" fill={COLORS.normal} fillOpacity={0.8} />
-                    <Area dataKey="overweight" stackId="z" stroke="none" fill={COLORS.overweight} fillOpacity={0.8} />
-                    <Area dataKey="obesity" stackId="z" stroke="none" fill={COLORS.obesity} fillOpacity={0.8} />
-                    <ReferenceDot x={user.age} y={finalBmi} r={6} fill="#fff" stroke={COLORS.ink} strokeWidth="2" />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-              <div style={{ position: "relative", height: 12, borderRadius: 6, background: `linear-gradient(90deg, ${COLORS.underweight}, ${COLORS.normal} 30%, ${COLORS.normal} 60%, ${COLORS.overweight} 80%, ${COLORS.obesity})` }}>
-                <div style={{ position: "absolute", left: `${Math.max(0, Math.min(100, ((finalBmi - Y_MIN) / (Y_MAX - Y_MIN)) * 100))}%`, top: -4, width: 18, height: 18, borderRadius: "50%", background: "#fff", border: `2px solid ${COLORS.ink}`, transform: "translateX(-50%)" }} />
+              <div style={{ height: 250, width: \"100%\", marginBottom: 20 }}>
+                <ResponsiveContainer width=\"100%\" height=\"100%\">\n                  <AreaChart data={referenceChartData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>\n                    <CartesianGrid stroke={COLORS.line} vertical={false} />\n                    <XAxis dataKey=\"age\" type=\"number\" domain={[18, 90]} tick={{ fontSize: 12, fill: COLORS.inkSoft }} />\n                    <YAxis domain={[Y_MIN, Y_MAX]} tick={{ fontSize: 12, fill: COLORS.inkSoft }} />\n                    <Area dataKey=\"underweight\" stackId=\"z\" stroke=\"none\" fill={COLORS.underweight} fillOpacity={0.8} />\n                    <Area dataKey=\"normal\" stackId=\"z\" stroke=\"none\" fill={COLORS.normal} fillOpacity={0.8} />\n                    <Area dataKey=\"overweight\" stackId=\"z\" stroke=\"none\" fill={COLORS.overweight} fillOpacity={0.8} />\n                    <Area dataKey=\"obesity\" stackId=\"z\" stroke=\"none\" fill={COLORS.obesity} fillOpacity={0.8} />\n                    <ReferenceDot x={user.age} y={finalBmi} r={6} fill=\"#fff\" stroke={COLORS.ink} strokeWidth={2} />\n                  </AreaChart>\n                </ResponsiveContainer>\n              </div>
+              <div style={{ position: \"relative\", height: 12, borderRadius: 6, background: `linear-gradient(90deg, ${COLORS.underweight}, ${COLORS.normal} 30%, ${COLORS.normal} 60%, ${COLORS.overweight} 80%, ${COLORS.obesity})` }}>
+                <div style={{ position: \"absolute\", left: `${Math.max(0, Math.min(100, ((finalBmi - Y_MIN) / (Y_MAX - Y_MIN)) * 100))}%`, top: -4, width: 18, height: 18, borderRadius: \"50%\", background: \"#fff\", border: `2px solid ${COLORS.ink}`, transform: \"translateX(-50%)\" }} />
               </div>
             </div>
-            <div style={{ background: "#fff", padding: 32, borderRadius: 16, border: `1px solid ${COLORS.line}` }}>
+            <div style={{ background: \"#fff\", padding: 32, borderRadius: 16, border: `1px solid ${COLORS.line}` }}>
               <h3 style={{ marginTop: 0, marginBottom: 20 }}>BMI Development Trend</h3>
-              <div style={{ height: 300, width: "100%" }}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={simulationData} margin={{ top: 5, right: 5, left: -20, bottom: 40 }}>
-                    <CartesianGrid stroke={COLORS.line} vertical={false} />
-                    <XAxis dataKey="week" tick={{ fontSize: 12, fill: COLORS.inkSoft }} />
-                    <YAxis domain={[Y_MIN, Y_MAX]} tick={{ fontSize: 12, fill: COLORS.inkSoft }} />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="bmi" stroke={COLORS.accent} strokeWidth={3} dot={false} animationDuration={300} />
-                    <text x="95%" y="290" textAnchor="middle" fontSize="12" fill={COLORS.inkSoft} fontWeight="600">Weeks</text>
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
+              <div style={{ height: 300, width: \"100%\" }}>
+                <ResponsiveContainer width=\"100%\" height=\"100%\">\n                  <LineChart data={simulationData} margin={{ top: 5, right: 5, left: -20, bottom: 40 }}>\n                    <CartesianGrid stroke={COLORS.line} vertical={false} />\n                    <XAxis dataKey=\"week\" tick={{ fontSize: 12, fill: COLORS.inkSoft }} />\n                    <YAxis domain={[Y_MIN, Y_MAX]} tick={{ fontSize: 12, fill: COLORS.inkSoft }} />\n                    <Tooltip />\n                    <Line type=\"monotone\" dataKey=\"bmi\" stroke={COLORS.accent} strokeWidth={3} dot={false} animationDuration={300} />\n                    <text x=\"95%\" y=\"290\" textAnchor=\"middle\" fontSize=\"12\" fill={COLORS.inkSoft} fontWeight=\"600\">Weeks</text>\n                  </LineChart>\n                </ResponsiveContainer>\n              </div>
             </div>
           </div>
         </div>
