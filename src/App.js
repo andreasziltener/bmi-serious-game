@@ -45,10 +45,10 @@ function classify(bmi, bounds) {
 // --- IMAGE-BASED CLD COMPONENT ---
 const StageCld = ({ stage }) => {
   const imageMap = {
-    0: "/images/stage0.png",
-    1: "/images/stage1.png",
-    2: "/images/stage2.png",
-    3: "/images/stage3.png",
+    0: "images/stage0.png",
+    1: "images/stage1.png",
+    2: "images/stage2.png",
+    3: "images/stage3.png",
   };
 
   return (
