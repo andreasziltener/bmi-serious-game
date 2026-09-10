@@ -137,38 +137,38 @@ export default function BmiSeriousGame() {
               <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
                 <h3 style={{ marginTop: 0 }}>Stage 0: Baseline</h3>
                 <div style={{ display: "flex", gap: 8 }}>
-                  {[\"female\", \"male\"].map(g => (
+                  {["female", "male"].map(g => (
                     <button key={g} onClick={() => setUser({...user, gender: g})} 
                       style={{ flex: 1, padding: 10, borderRadius: 8, border: `1px solid ${user.gender === g ? COLORS.accent : COLORS.line}`, 
-                      background: user.gender === g ? \"rgba(47,111,98,0.1)\" : \"transparent\", cursor: \"pointer\", textTransform: \"capitalize\" }}>{g}</button>
+                      background: user.gender === g ? "rgba(47,111,98,0.1)" : "transparent", cursor: "pointer", textTransform: "capitalize" }}>{g}</button>
                   ))}
                 </div>
                 <div><label style={{ fontSize: 13 }}>Age: {user.age}</label>
-                  <input type=\"range\" min={18} max={90} value={user.age} onChange={e => setUser({...user, age: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
+                  <input type="range" min={18} max={90} value={user.age} onChange={e => setUser({...user, age: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
                 </div>
                 <div><label style={{ fontSize: 13 }}>Height (cm): {user.height}</label>
-                  <input type=\"range\" min={120} max={220} value={user.height} onChange={e => setUser({...user, height: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
+                  <input type="range" min={120} max={220} value={user.height} onChange={e => setUser({...user, height: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
                 </div>
                 <div><label style={{ fontSize: 13 }}>Weight (kg): {user.weight}</label>
-                  <input type=\"range\" min={30} max={200} value={user.weight} onChange={e => setUser({...user, weight: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
+                  <input type="range" min={30} max={200} value={user.weight} onChange={e => setUser({...user, weight: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
                 </div>
-                <button onClick={() => setStage(1)} style={{ width: \"100%\", padding: 12, background: COLORS.accent, color: \"#fff\", border: \"none\", borderRadius: 8, cursor: \"pointer\", fontWeight: 600 }}>Continue to Stage 1</button>
+                <button onClick={() => setStage(1)} style={{ width: "100%", padding: 12, background: COLORS.accent, color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontWeight: 600 }}>Continue to Stage 1</button>
               </div>
             )}
 
             {stage === 1 && (
-              <div style={{ display: \"flex\", flexDirection: \"column\", gap: 15 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
                 <h3 style={{ marginTop: 0 }}>Stage 1: Caloric Intake</h3>
                 <p style={{ fontSize: 13, color: COLORS.inkSoft }}>Threshold: {user.gender === 'male' ? '2300' : '1800'} kcal</p>
                 <div><label style={{ fontSize: 13 }}>Daily Calories: {user.calories}</label>
-                  <input type=\"range\" min={1000} max={4000} step=\"50\" value={user.calories} onChange={e => setUser({...user, calories: parseInt(e.target.value)})} style={{ width: \"100%\", accentColor: COLORS.accent }} />
+                  <input type="range" min={1000} max={4000} step="50" value={user.calories} onChange={e => setUser({...user, calories: parseInt(e.target.value)})} style={{ width: "100%", accentColor: COLORS.accent }} />
                 </div>
-                <button onClick={() => setStage(2)} style={{ width: \"100%\", padding: 12, background: COLORS.accent, color: \"#fff\", border: \"none\", borderRadius: 8, cursor: \"pointer\" }}>Continue to Stage 2</button>
+                <button onClick={() => setStage(2)} style={{ width: "100%", padding: 12, background: COLORS.accent, color: "#fff", border: "none", borderRadius: 8, cursor: "pointer" }}>Continue to Stage 2</button>
               </div>
             )}
 
             {stage === 2 && (
-              <div style={{ display: \"flex\", flexDirection: \"column\", gap: 15 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
                 <h3 style={{ marginTop: 0 }}>Stage 2: Physical Activity</h3>
                 <p style={{ fontSize: 13, color: COLORS.inkSoft }}>Equilibrium: 2 days/week</p>
                 <div><label style={{ fontSize: 13 }}>Sport: {user.sportDays} days/week</label>
