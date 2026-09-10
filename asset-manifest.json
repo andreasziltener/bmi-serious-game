@@ -1,15 +1,19 @@
 {
   "files": {
     "main.css": "/bmi-serious-game/static/css/main.e6c13ad2.css",
-    "main.js": "/bmi-serious-game/static/js/main.2bdd2328.js",
+    "main.js": "/bmi-serious-game/static/js/main.799aacd2.js",
     "static/js/453.fafa459a.chunk.js": "/bmi-serious-game/static/js/453.fafa459a.chunk.js",
+    "static/media/stage3.png": "/bmi-serious-game/static/media/stage3.1b745eb4df0dcb0fc7fa.png",
+    "static/media/stage2.png": "/bmi-serious-game/static/media/stage2.036469cac49127292d5e.png",
+    "static/media/stage1.png": "/bmi-serious-game/static/media/stage1.5a2e0d4217bb2896da0e.png",
+    "static/media/stage0.png": "/bmi-serious-game/static/media/stage0.f3647c939bec8b9587a1.png",
     "index.html": "/bmi-serious-game/index.html",
     "main.e6c13ad2.css.map": "/bmi-serious-game/static/css/main.e6c13ad2.css.map",
-    "main.2bdd2328.js.map": "/bmi-serious-game/static/js/main.2bdd2328.js.map",
+    "main.799aacd2.js.map": "/bmi-serious-game/static/js/main.799aacd2.js.map",
     "453.fafa459a.chunk.js.map": "/bmi-serious-game/static/js/453.fafa459a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.2bdd2328.js"
+    "static/js/main.799aacd2.js"
   ]
 }
