@@ -42,56 +42,25 @@ function classify(bmi, bounds) {
   return { label: "Obesity", color: COLORS.obesity };
 }
 
-// --- DYNAMIC CLD COMPONENT ---
+// --- IMAGE-BASED CLD COMPONENT ---
 const StageCld = ({ stage }) => {
+  const imageMap = {
+    0: "/images/stage0.png",
+    1: "/images/stage1.png",
+    2: "/images/stage2.png",
+    3: "/images/stage3.png",
+  };
+
   return (
-    <div style={{ background: '#fff', padding: '15px', borderRadius: '12px', border: `1px solid ${COLORS.line}`, marginBottom: '20px' }}>
-      <p style={{ textAlign: 'center', fontSize: '12px', fontWeight: '600', marginBottom: '10px', color: COLORS.inkSoft }}>Causal Loop Diagram</p>
-      <svg viewBox="0 0 400 300" width="100%" height="250" style={{ maxWidth: 400, margin: '0 auto' }}>
-        <defs>
-          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-            <polygon points="0 0, 10 3.5, 0 7" fill="#5B6B67" />
-          </marker>
-          <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-            <polygon points="0 0, 10 3.5, 0 7" fill={COLORS.accent} />
-          </marker>
-        </defs>
-        {/* Core Nodes */}
-        <rect x="150" y="30" width="100" height="40" rx="10" fill="#fff" stroke={COLORS.ink} strokeWidth="2" />
-        <text x="200" y="55" textAnchor="middle" fontSize="12" fontWeight="600">Weight</text>
-        <rect x="40" y="120" width="100" height="40" rx="10" fill="#fff" stroke={COLORS.ink} strokeWidth="2" />
-        <text x="90" y="145" textAnchor="middle" fontSize="12" fontWeight="600">Hunger</text>
-        <rect x="260" y="120" width="100" height="40" rx="10" fill="#fff" stroke={COLORS.ink} strokeWidth="2" />
-        <text x="310" y="145" textAnchor="middle" fontSize="12" fontWeight="600">Food Intake</text>
-        
-        {/* Reinforcing Loop */}
-        <path d="M 150 50 Q 90 50 90 120" fill="none" stroke={COLORS.inkSoft} strokeWidth="2" markerEnd="url(#arrowhead)" />
-        <text x="70" y="80" fontSize="12" fill={COLORS.inkSoft} fontWeight="bold">+</text>
-        <path d="M 140 140 L 260 140" fill="none" stroke={COLORS.inkSoft} strokeWidth="2" markerEnd="url(#arrowhead)" />
-        <text x="200" y="135" textAnchor="middle" fontSize="12" fill={COLORS.inkSoft} fontWeight="bold">+</text>
-        <path d="M 310 120 Q 310 50 250 50" fill="none" stroke={COLORS.inkSoft} strokeWidth="2" markerEnd="url(#arrowhead)" />
-        <text x="320" y="80" fontSize="12" fill={COLORS.inkSoft} fontWeight="bold">+</text>
-
-        {/* Stage 2: Sport Loop */}
-        {stage >= 2 && (
-          <>
-            <rect x="150" y="200" width="100" height="40" rx="10" fill="#fff" stroke={COLORS.accent} strokeWidth="2" />
-            <text x="200" y="225" textAnchor="middle" fontSize="12" fontWeight="600">Sport</text>
-            <path d="M 200 70 L 200 200" fill="none" stroke={COLORS.accent} strokeWidth="2" markerEnd="url(#arrowhead-green)" />
-            <text x="210" y="140" fontSize="12" fill={COLORS.accent} fontWeight="bold">-</text>
-          </>
-        )}
-
-        {/* Stage 3: Diet Loop */}
-        {stage >= 3 && (
-          <>
-            <rect x="150" y="260" width="100" height="40" rx="10" fill="#fff" stroke={COLORS.accent} strokeWidth="2" />
-            <text x="200" y="285" textAnchor="middle" fontSize="12" fontWeight="600">Healthy Food</text>
-            <path d="M 200 70 L 200 260" fill="none" stroke={COLORS.accent} strokeWidth="2" markerEnd="url(#arrowhead-green)" />
-            <text x="210" y="180" fontSize="12" fill={COLORS.accent} fontWeight="bold">-</text>
-          </>
-        )}
-      </svg>
+    <div style={{ background: '#fff', padding: '20px', borderRadius: '12px', border: `1px solid ${COLORS.line}`, marginBottom: '20px' }}>
+      <p style={{ textAlign: 'center', fontSize: '14px', fontWeight: '600', marginBottom: '15px', color: COLORS.inkSoft }}>Causal Loop Diagram</p>
+      <div style={{ textAlign: 'center', width: '100%' }}>
+        <img 
+          src={imageMap[stage] || imageMap[0]} 
+          alt={`Causal Loop Diagram Stage ${stage}`} 
+          style={{ width: '100%', height: 'auto', borderRadius: '8px', objectFit: 'contain' }} 
+        />
+      </div>
     </div>
   );
 };
@@ -148,14 +117,15 @@ export default function BmiSeriousGame() {
 
   return (
     <div style={{ background: COLORS.bg, color: COLORS.ink, minHeight: "100vh", padding: "40px 24px", fontFamily: "Inter, sans-serif" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <header style={{ marginBottom: 40 }}>
           <h1 style={{ fontSize: 24, fontWeight: 600 }}>BMI System Dynamics Simulation</h1>
           <p style={{ color: COLORS.inkSoft }}>Analyze the interaction between reinforcing and balancing loops.</p>
         </header>
 
-        <div style={{ display: "grid", gridTemplateColumns: "350px 1fr", gap: 40 }}>
-          <div style={{ background: "#fff", padding: 24, borderRadius: 16, border: `1px solid ${COLORS.line}`, height: "fit-content" }}>
+        {/* GRID CHANGED TO 1fr 1fr FOR EQUAL WIDTH */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40 }}>
+          <div style={{ background: "#fff", padding: 32, borderRadius: 16, border: `1px solid ${COLORS.line}`, height: "fit-content" }}>
             <StageCld stage={stage} />
             
             {stage === 0 && (
@@ -237,7 +207,7 @@ export default function BmiSeriousGame() {
                     <Area dataKey="normal" stackId="z" stroke="none" fill={COLORS.normal} fillOpacity={0.8} />
                     <Area dataKey="overweight" stackId="z" stroke="none" fill={COLORS.overweight} fillOpacity={0.8} />
                     <Area dataKey="obesity" stackId="z" stroke="none" fill={COLORS.obesity} fillOpacity={0.8} />
-                    <ReferenceDot x={user.age} y={finalBmi} r={6} fill="#fff" stroke={COLORS.ink} strokeWidth={2} />
+                    <ReferenceDot x={user.age} y={finalBmi} r={6} fill="#fff" stroke={COLORS.ink} strokeWidth="2" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -249,12 +219,13 @@ export default function BmiSeriousGame() {
               <h3 style={{ marginTop: 0, marginBottom: 20 }}>BMI Development Trend</h3>
               <div style={{ height: 300, width: "100%" }}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={simulationData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                  <LineChart data={simulationData} margin={{ top: 5, right: 5, left: -20, bottom: 40 }}>
                     <CartesianGrid stroke={COLORS.line} vertical={false} />
-                    <XAxis dataKey="week" label={{ value: 'Weeks', position: 'insideBottomRight', offset: -5 }} tick={{ fontSize: 12, fill: COLORS.inkSoft }} />
+                    <XAxis dataKey="week" tick={{ fontSize: 12, fill: COLORS.inkSoft }} />
                     <YAxis domain={[Y_MIN, Y_MAX]} tick={{ fontSize: 12, fill: COLORS.inkSoft }} />
                     <Tooltip />
                     <Line type="monotone" dataKey="bmi" stroke={COLORS.accent} strokeWidth={3} dot={false} animationDuration={300} />
+                    <text x="95%" y="290" textAnchor="middle" fontSize="12" fill={COLORS.inkSoft} fontWeight="600">Weeks</text>
                   </LineChart>
                 </ResponsiveContainer>
               </div>
